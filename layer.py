@@ -35,3 +35,11 @@ class Layer:
         """
         # TODO: update parameters and return input gradient
         pass
+
+    def saveLayer(self):
+        """Return a JSON object of the relevant layer data"""
+        pass
+
+    def loadLayer(self, obj):
+        """Loads a layer from JSON object. Inserted object must correspond to layer type as no checks are performed at the moment"""
+        pass

@@ -15,22 +15,24 @@ class Convolutional(Layer):
     biases          (list)  - The biases for the convolutional layer.
     """
 
-    def __init__(self, input_shape, kernel_size, depth):
+    def __init__(self, input_shape, kernel_size, depth, overrideInit = False):
         """Initializes the Convolutional layer with random kernels and biases.
 
         Parameters:
-        input_shape (tuple) - The shape of the input (depth, height, width).
-        kernel_size (int)   - The size of the convolutional kernels (filters).
-        depth       (int)   - The number of convolutional kernels (filters).
+        input_shape     (tuple) - The shape of the input (depth, height, width).
+        kernel_size     (int)   - The size of the convolutional kernels (filters).
+        depth           (int)   - The number of convolutional kernels (filters).
+        overrideInit    (bool)  - True if default init should be excluded. Default = False
         """
-        input_depth, input_height, input_width = input_shape
-        self.depth = depth
-        self.input_shape = input_shape
-        self.input_depth = input_depth
-        self.output_shape = (depth, input_height - kernel_size + 1, input_width - kernel_size + 1)
-        self.kernels_shape = (depth, input_depth, kernel_size, kernel_size)
-        self.kernels = np.random.randn(*self.kernels_shape)
-        self.biases = np.random.randn(*self.output_shape)
+        if not overrideInit:
+            input_depth, input_height, input_width = input_shape
+            self.depth = depth
+            self.input_shape = input_shape
+            self.input_depth = input_depth
+            self.output_shape = (depth, input_height - kernel_size + 1, input_width - kernel_size + 1)
+            self.kernels_shape = (depth, input_depth, kernel_size, kernel_size)
+            self.kernels = np.random.randn(*self.kernels_shape)
+            self.biases = np.random.randn(*self.output_shape)
 
     def forward(self, input):
         """Performs the forward pass through the convolutional layer.
@@ -69,3 +71,25 @@ class Convolutional(Layer):
         self.kernels -= learning_rate * kernels_gradient
         self.biases -= learning_rate * output_gradient
         return input_gradient
+    
+    def saveLayer(self):
+        layerObject = {
+            "depth": self.depth,
+            "input_shape": self.input_shape,
+            "input_depth": self.input_depth,
+            "output_shape": self.output_shape,
+            "kernels_shape": self.kernels_shape,
+            "kernels": self.kernels,
+            "biases": self.biases,
+            "type": "Convolutional"
+        }
+        return layerObject
+    
+    def loadLayer(self, obj):
+        self.depth = obj["depth"]
+        self.input_shape = obj["input_shape"]
+        self.input_depth = obj["input_depth"]
+        self.output_shape = obj["output_shape"]
+        self.kernels_shape = obj["kernels_shape"]
+        self.kernels = obj["kernels"]
+        self.biases = obj["biases"]

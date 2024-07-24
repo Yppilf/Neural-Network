@@ -9,16 +9,18 @@ class Dense(Layer):
     bias    (list) - The bias vector of the layer.
     """
 
-    def __init__(self, input_size, output_size):
+    def __init__(self, input_size, output_size, overrideInit = False):
         """
         Initializes the Dense layer with random weights and biases.
 
         Parameters:
-        input_size  (int) - The number of input features.
-        output_size (int) - The number of output features.
+        input_size      (int)   - The number of input features.
+        output_size     (int)   - The number of output features.
+        overrideInit    (bool)  - True if default init should be excluded. Default = False
         """
-        self.weights = np.random.randn(output_size, input_size)
-        self.bias = np.random.randn(output_size, 1)
+        if not overrideInit:
+            self.weights = np.random.randn(output_size, input_size)
+            self.bias = np.random.randn(output_size, 1)
 
     def forward(self, input):
         """Performs the forward pass through the dense layer.
@@ -47,3 +49,15 @@ class Dense(Layer):
         self.weights -= learning_rate * weights_gradient
         self.bias -= learning_rate * output_gradient
         return input_gradient
+    
+    def saveLayer(self):
+        layerObject = {
+            "weights": self.weights,
+            "bias": self.bias,
+            "type": "Dense"
+        }
+        return layerObject
+    
+    def loadLayer(self, obj):
+        self.bias = np.array(obj["bias"])
+        self.weights = np.array(obj["weights"])

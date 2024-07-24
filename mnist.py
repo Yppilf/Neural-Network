@@ -1,12 +1,12 @@
 import numpy as np
-from keras.datasets import mnist
-from keras.utils import to_categorical
+from keras.datasets import mnist # type: ignore
+from keras.utils import to_categorical # type: ignore
+
+from losses import mse, mse_prime
+from network import Network
 
 from dense import Dense
 from activations import Tanh
-from losses import mse, mse_prime
-from network import train, predict
-
 
 def preprocess_data(x, y, limit):
     # reshape and normalize input data
@@ -21,25 +21,37 @@ def preprocess_data(x, y, limit):
 
 # load MNIST from server
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
-x_train, y_train = preprocess_data(x_train, y_train, 10000)
+x_train, y_train = preprocess_data(x_train, y_train, 1000)
 x_test, y_test = preprocess_data(x_test, y_test, -1)
 
-# neural network
-network = [
-    Dense(28 * 28, 40),
-    Tanh(),
-    Dense(40, 10),
-    Tanh()
-]
+# # neural network
+# networkStructure = [
+#     Dense(28 * 28, 40),
+#     Tanh(),
+#     Dense(40, 10),
+#     Tanh()
+# ]
+# network = Network(networkStructure, learning_rate=0.1)
 
-# train
-train(network, mse, mse_prime, x_train, y_train, epochs=100, learning_rate=0.1, verbose = False)
+# # train
+# errors = network.train(mse, mse_prime, x_train, y_train, epochs=10, verbose = True)
+
+# # Test some functionalities
+# network.dispPrediction(x_test[0])
+# network.dispErrors()
+# network.saveNetwork("mnist2")
+
+network2 = Network([], overrideInit=True)
+network2.loadNetwork("mnist")
 
 # test
 correct = 0
 for x, y in zip(x_test, y_test):
-    output = predict(network, x)
+    output = network2.predict(x)
     prediction = np.argmax(output)
     true_val = np.argmax(y)
     if prediction == true_val:
         correct += 1
+testing_accuracy = correct/len(x_test)
+print(f"Testing accuracy: {testing_accuracy:.2f}")
+

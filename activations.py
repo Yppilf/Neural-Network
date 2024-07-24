@@ -10,10 +10,11 @@ class Tanh(Activation):
         def tanh_prime(x):
             return 1 - np.tanh(x) ** 2
 
-        super().__init__(tanh, tanh_prime)
+        super().__init__(tanh, tanh_prime, "Tanh")
 
 class Sigmoid(Activation):
     def __init__(self):
+        self.type = "Sigmoid"
         def sigmoid(x):
             return 1 / (1 + np.exp(-x))
 
@@ -21,7 +22,7 @@ class Sigmoid(Activation):
             s = sigmoid(x)
             return s * (1 - s)
 
-        super().__init__(sigmoid, sigmoid_prime)
+        super().__init__(sigmoid, sigmoid_prime, "Sigmoid")
 
 class Softmax(Layer):
     def forward(self, input):
