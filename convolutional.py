@@ -43,12 +43,17 @@ class Convolutional(Layer):
         Returns:
         (list) - The output of the layer after applying the convolution operation.
         """
-        self.input = input
+        self.input = np.array(input)  # Ensure input is a numpy array
         self.output = np.copy(self.biases)
         for i in range(self.depth):
             for j in range(self.input_depth):
-                self.output[i] += signal.correlate2d(self.input[j], self.kernels[i, j], "valid")
+                input_slice = self.input[j]
+                kernel_slice = self.kernels[i, j]
+                if input_slice.ndim != 2 or kernel_slice.ndim != 2:
+                    raise ValueError('correlate2d inputs must both be 2-D arrays')
+                self.output[i] += signal.correlate2d(input_slice, kernel_slice, "valid")
         return self.output
+
 
     def backward(self, output_gradient, learning_rate):
         """Performs the backward pass through the convolutional layer, updating the layer's parameters and computing the gradient for the input.
@@ -87,9 +92,10 @@ class Convolutional(Layer):
     
     def loadLayer(self, obj):
         self.depth = obj["depth"]
-        self.input_shape = obj["input_shape"]
+        self.input_shape = tuple(obj["input_shape"])
         self.input_depth = obj["input_depth"]
-        self.output_shape = obj["output_shape"]
-        self.kernels_shape = obj["kernels_shape"]
-        self.kernels = obj["kernels"]
-        self.biases = obj["biases"]
+        self.output_shape = tuple(obj["output_shape"])
+        self.kernels_shape = tuple(obj["kernels_shape"])
+        self.kernels = np.array(obj["kernels"])
+        self.biases = np.array(obj["biases"])
+

@@ -34,3 +34,5 @@ train(network, mse, mse_prime, X, Y, epochs=10000, learning_rate=0.1)
 # Edits
 Added docstrings
 Fixed MNIST imports
+Converted to object oriented approach
+Added save and load functionality
