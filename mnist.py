@@ -29,7 +29,7 @@ from reshape import Reshape
 
 # Load MNIST from files
 dg = DataGetter()
-dg.load_files("mnist_data")
+dg.load_files("mnist_data_2")
 x_train = dg.x_train
 x_test = dg.x_test
 y_train = dg.y_train
