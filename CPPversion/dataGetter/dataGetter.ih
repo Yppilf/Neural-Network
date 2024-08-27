@@ -1,0 +1,7 @@
+#include "dataGetter.h"
+#include <fstream>  // File streams
+#include <sstream>  // String streams
+
+std::vector<std::vector<std::vector<double>>> read_3d_array_from_file(const std::string& file_name);
+
+using namespace std;
