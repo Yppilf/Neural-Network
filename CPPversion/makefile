@@ -1,8 +1,6 @@
-# Compiler
+# Compiler and flags
 CXX = g++
-
-# Compiler Flags
-CXXFLAGS = -Wall -Werror -std=c++11 -O2
+CXXFLAGS = -Wall -Werror -std=c++17 -O2
 
 # Directories
 SRC_DIRS = . dataGetter
@@ -12,7 +10,7 @@ OBJ_DIR = obj
 SRCS = $(foreach dir, $(SRC_DIRS), $(wildcard $(dir)/*.cc))
 
 # Object files
-OBJS = $(pathsubst %.cc, $(OBJ_DIR)/%.o, $(SRCS))
+OBJS = $(patsubst %.cc, $(OBJ_DIR)/%.o, $(SRCS))
 
 # Executable name
 TARGET = main
@@ -25,12 +23,16 @@ $(TARGET): $(OBJS)
 	$(CXX) $(CXXFLAGS) -o $@ $(OBJS)
 
 # Rule for compiling .cc files into .o files
-$.o: $.cc
+$(OBJ_DIR)/%.o: %.cc
+	@mkdir -p $(dir $@)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-%.o: %/%.cc
+$(OBJ_DIR)/%.o:: %/%.cc
+	@mkdir -p $(dir $@)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 # Clean up build files
 clean:
 	rm -rf $(OBJ_DIR) $(TARGET)
+
+.PHONY: all clean
