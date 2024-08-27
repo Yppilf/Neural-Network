@@ -7,4 +7,4 @@ Added docstrings
 Fixed MNIST imports
 Converted to object oriented approach
 Added save and load functionality
-CNN code does not work currently, only the neural network does. See mnist.py for example codes. Use mnist.json for a 91% accuracy on the MNIST database
+CNN code does not work currently, only the neural network does. See mnist.py for example codes. Use mnist.json for a model on the MNIST database
