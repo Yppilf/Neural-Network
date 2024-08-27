@@ -1,7 +1,7 @@
 import numpy as np
 from keras.datasets import mnist # type: ignore
 from keras.utils import to_categorical # type: ignore
-import os
+import os, h5py
 
 class DataGetter():
     def __init__(self):
@@ -27,16 +27,22 @@ class DataGetter():
     
     def write_files(self, folder_name):
         os.makedirs(folder_name, exist_ok=True)
-        np.save(f"{folder_name}/training_data.npy", self.x_train)
-        np.save(f"{folder_name}/training_labels.npy", self.y_train)
-        np.save(f"{folder_name}/testing_data.npy", self.x_test)
-        np.save(f"{folder_name}/testing_labels.npy", self.y_test)
+        file_path = os.path.join(folder_name, 'data.h5')
+        
+        with h5py.File(file_path, 'w') as f:
+            f.create_dataset('x_train', data=self.x_train)
+            f.create_dataset('y_train', data=self.y_train)
+            f.create_dataset('x_test', data=self.x_test)
+            f.create_dataset('y_test', data=self.y_test)
 
     def load_files(self, folder_name):
-        self.x_train = np.load(f"{folder_name}/training_data.npy")
-        self.y_train = np.load(f"{folder_name}/training_labels.npy")
-        self.x_test = np.load(f"{folder_name}/testing_data.npy")
-        self.y_test = np.load(f"{folder_name}/testing_labels.npy")
+        file_path = os.path.join(folder_name, 'data.h5')
+        
+        with h5py.File(file_path, 'r') as f:
+            self.x_train = f['x_train'][:]
+            self.y_train = f['y_train'][:]
+            self.x_test = f['x_test'][:]
+            self.y_test = f['y_test'][:]
 
 if __name__ == "__main__":
     dg = DataGetter()
