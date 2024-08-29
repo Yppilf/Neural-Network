@@ -3,7 +3,7 @@ CXX = g++
 CXXFLAGS = -Wall -Werror -std=c++17 -O2
 
 # Directories
-SRC_DIRS = . dataGetter layer dense activation tanh sigmoid
+SRC_DIRS = . activation connectiveLayer dataGetter dense helper layer network sigmoid tanh
 OBJ_DIR = obj
 
 # Source files
