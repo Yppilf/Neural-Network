@@ -1,6 +1,6 @@
-#include "layer.ih"
+#include "helper.ih"
 
-vector<vector<double>> Layer::deserializeMatrix(const string &matrixStr) {
+vector<vector<double>> deserializeMatrix(const string &matrixStr) {
     vector<vector<double>> matrix;
     istringstream iss(matrixStr);
     string rowStr;

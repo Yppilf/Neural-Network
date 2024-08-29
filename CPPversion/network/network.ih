@@ -1,0 +1,11 @@
+#include "network.h"
+#include <fstream>
+#include <iostream>
+#include <sstream>
+
+// Specific layer types
+#include "../dense/dense.h"
+#include "../tanh/tanh.h"
+#include "../sigmoid/sigmoid.h"
+
+using namespace std;

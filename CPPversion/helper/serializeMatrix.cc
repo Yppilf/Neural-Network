@@ -1,6 +1,6 @@
-#include "layer.ih"
+#include "helper.ih"
 
-string Layer::serializeMatrix(const std::vector<std::vector<double>> &matrix) const
+string serializeMatrix(const std::vector<std::vector<double>> &matrix)
 {
     ostringstream oss;
     for (size_t i =0; i != matrix.size(); ++i) {

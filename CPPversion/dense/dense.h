@@ -1,9 +1,9 @@
 #ifndef DENSE_H
 #define DENSE_H
 
-#include "../layer/layer.h"
+#include "../connectiveLayer/connectiveLayer.h"
 
-class Dense : public Layer {
+class Dense : public ConnectiveLayer {
     std::vector<std::vector<double>> weights;
     std::vector<std::vector<double>> bias;
 
@@ -14,6 +14,9 @@ class Dense : public Layer {
 
         std::string saveLayer() const override;
         void loadLayer(const std::string &jsonStr) override;
+
+        void setWeights(const std::vector<std::vector<double>> &new_weights);
+        void setBiases(const std::vector<std::vector<double>> &new_biases);
 
     private:
         double generateRandomNumber();

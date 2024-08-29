@@ -1,6 +1,6 @@
-#include "layer.ih"
+#include "helper.ih"
 
-string Layer::extractJsonField(const string &jsonStr, const string &fieldName) {
+string extractJsonField(const string &jsonStr, const string &fieldName) {
     size_t startPos = jsonStr.find("\"" + fieldName + "\":[");
     startPos += fieldName.length() + 4;     // +4 to account for "\":["
     size_t endPos = jsonStr.find("]", startPos);
