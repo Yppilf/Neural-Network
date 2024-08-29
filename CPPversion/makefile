@@ -3,7 +3,7 @@ CXX = g++
 CXXFLAGS = -Wall -Werror -std=c++17 -O2
 
 # Directories
-SRC_DIRS = . dataGetter
+SRC_DIRS = . dataGetter layer
 OBJ_DIR = obj
 
 # Source files
