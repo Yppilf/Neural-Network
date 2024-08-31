@@ -25,8 +25,17 @@ int main()
     auto y_test = dataGetter.getYTest();
 
     // Create network
+    vector<shared_ptr<Layer>> networkStructure = {
+        make_shared<Dense>(28*28, 40),
+        make_shared<Tanh>(),
+        make_shared<Dense>(40,10),
+        make_shared<Tanh>()
+    };
+    Network network(networkStructure, 0.1);
 
     // Train network
+    vector<double> errors = network.train(mse, mse_prime, x_train, y_train, 10, true);
 
     // Save network
+    network.saveNetwork("mnist3.json");
 }

@@ -1,4 +1,8 @@
 #include <iostream>
 #include "dataGetter/dataGetter.h"
+#include "network/network.h"
+#include "dense/dense.h"
+#include "tanh/tanh.h"
+#include "losses/mse.cc"
 
 using namespace std;
