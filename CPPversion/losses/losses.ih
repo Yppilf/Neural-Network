@@ -1,5 +1,5 @@
-#include <vector>
+#include "losses.h"
 #include <cmath>
-#include <functional>
+
 
 using namespace std;

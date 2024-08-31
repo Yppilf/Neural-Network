@@ -8,7 +8,7 @@ vector<vector<double>> Dense::forward(const vector<vector<double>> &input) {
 
     for (size_t i = 0; i != rows; ++i) {
         for (size_t j = 0; j < cols; ++j) {
-            double sum;
+            double sum = 0.0;
             for (size_t k = 0; k != weights[0].size(); ++k) {
                 sum += weights[i][k] * input[k][j];
             }

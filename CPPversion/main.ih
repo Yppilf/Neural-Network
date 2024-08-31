@@ -3,6 +3,6 @@
 #include "network/network.h"
 #include "dense/dense.h"
 #include "tanh/tanh.h"
-#include "losses/mse.cc"
+#include "losses/losses.h"
 
 using namespace std;

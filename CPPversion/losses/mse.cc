@@ -42,3 +42,4 @@ function<vector<vector<double>>(const vector<vector<double>>&, const vector<vect
         }
         return gradient;
     };
+
