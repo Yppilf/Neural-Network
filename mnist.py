@@ -53,7 +53,7 @@ y_test = dg.y_test
 # network.saveNetwork("mnist2")
 
 network2 = Network([], overrideInit=True)
-network2.loadNetwork("mnist")
+network2.loadNetwork("CPPversion/mnist3.json")
 
 # test
 correct = 0

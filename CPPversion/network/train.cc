@@ -19,12 +19,17 @@ vector<double> Network::train(
             // error
             error += loss(y_train[i], output);
 
+            cout << "train: Backward propagate...\n";
             // Backward propagate
             vector<vector<double>> grad = loss_prime(y_train[i], output);
+            cout << "train: Acquired losses...\n";
             for (auto it = network.rbegin(); it != network.rend(); ++it) {
+                cout << "Iterating...\n";
+                cout << "grad dimensions: " << grad.size() << "x" << grad[0].size() << "\n";
                 grad = (*it)->backward(grad, learning_rate);
             }
         }
+        cout << "train: calculate errors...\n";
         error /= x_train.size();
         errors.push_back(error);
 

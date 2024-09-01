@@ -15,8 +15,8 @@ class Dense : public ConnectiveLayer {
         std::string saveLayer() const override;
         void loadLayer(const std::string &jsonStr) override;
 
-        void setWeights(const std::vector<std::vector<double>> &new_weights);
-        void setBiases(const std::vector<std::vector<double>> &new_biases);
+        void setWeights(const std::vector<std::vector<double>> &new_weights) override;
+        void setBiases(const std::vector<std::vector<double>> &new_biases) override;
 
     private:
         double generateRandomNumber();

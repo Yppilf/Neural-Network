@@ -1,6 +1,6 @@
 # Compiler and flags
 CXX = g++
-CXXFLAGS = -Wall -Werror -std=c++17 -O2
+CXXFLAGS = -Wall -Werror -Wextra -std=c++17 -O2
 
 # Directories
 SRC_DIRS = . activation connectiveLayer dataGetter dense helper layer losses network sigmoid tanh

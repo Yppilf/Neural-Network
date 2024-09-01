@@ -6,11 +6,11 @@
 
 class DataGetter
 {
-    private:
-        std::vector<std::vector<std::vector<double>>> x_train;
-        std::vector<std::vector<std::vector<double>>> y_train;
-        std::vector<std::vector<std::vector<double>>> x_test;
-        std::vector<std::vector<std::vector<double>>> y_test;
+    
+    std::vector<std::vector<std::vector<double>>> x_train;
+    std::vector<std::vector<std::vector<double>>> y_train;
+    std::vector<std::vector<std::vector<double>>> x_test;
+    std::vector<std::vector<std::vector<double>>> y_test;
 
     public:
         // Constructor
@@ -24,6 +24,9 @@ class DataGetter
 
         // Loading data from files
         void load_files(const std::string& folder_name);
+
+        // transpose i,j,k to j,i,k
+        std::vector<std::vector<std::vector<double>>> transposeLabels(const std::vector<std::vector<std::vector<double>>> &data);
 };
 
 #endif

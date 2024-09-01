@@ -1,12 +1,15 @@
 #include "dense.ih"
+#include <iostream>
 
 vector<vector<double>> Dense::backward(const vector<vector<double>> &output_gradient, const double learning_rate) {
+    cout << "dense: backward propagation..\n";
     size_t rows = weights.size();
     size_t cols = input.size();
 
     vector<vector<double>> weights_gradient(rows, vector<double>(cols));
     vector<vector<double>> input_gradient(cols, vector<double>(output_gradient[0].size()));
 
+    cout << "dense: determining weights gradient..\n";
     // weights gradient is dot product between output gradient and transmute of input
     for (size_t i = 0; i != rows; ++i) {
         for (size_t j = 0; j != cols; ++j) {
@@ -17,6 +20,7 @@ vector<vector<double>> Dense::backward(const vector<vector<double>> &output_grad
         }
     }
 
+    cout << "dense: Determining input gradient...\n";
     // input gradient is dot product between transmute of weights and output gradient
     for (size_t i = 0; i != cols; ++i) {
         for (size_t j = 0; j != output_gradient[0].size(); ++j) {
@@ -27,6 +31,7 @@ vector<vector<double>> Dense::backward(const vector<vector<double>> &output_grad
         }
     }
 
+    cout << "dense: Determining new weights and biases...\n";
     for (size_t i = 0; i != rows; ++i) {
         for (size_t j = 0; j != cols; ++j) {
             weights[i][j] -= learning_rate * weights_gradient[i][j];
