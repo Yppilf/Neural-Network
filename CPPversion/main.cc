@@ -4,7 +4,7 @@ int main()
 {
     // Acquire data
     DataGetter dataGetter;
-    dataGetter.load_files("../mnist_data_2");
+    dataGetter.read_files("../tiny_mnist_data_3");
     auto x_train = dataGetter.getXTrain();
     auto y_train = dataGetter.getYTrain();
     auto x_test = dataGetter.getXTest();
