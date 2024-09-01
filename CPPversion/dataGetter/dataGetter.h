@@ -25,8 +25,16 @@ class DataGetter
         // Loading data from files
         void load_files(const std::string& folder_name);
 
+        // New file structure for MNIST
+        void read_files(const std::string &folder_name);
+
+
         // transpose i,j,k to j,i,k
         std::vector<std::vector<std::vector<double>>> transposeLabels(const std::vector<std::vector<std::vector<double>>> &data);
+
+    private:
+        // For reading one file
+        std::vector<std::vector<std::vector<double>>> read_file(const std::string &filename);
 };
 
 #endif
