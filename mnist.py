@@ -29,11 +29,13 @@ from reshape import Reshape
 
 # Load MNIST from files
 dg = DataGetter()
-dg.load_files("mnist_data_2")
+dg.read_files("mini_mnist_data_3")
 x_train = dg.x_train
 x_test = dg.x_test
 y_train = dg.y_train
 y_test = dg.y_test
+
+print(np.array(x_test).shape)
 
 # neural network
 networkStructure = [
@@ -50,10 +52,10 @@ errors = network.train(mse, mse_prime, x_train, y_train, epochs=50, verbose = Tr
 # Test some functionalities
 # network.dispPrediction(x_test[0])
 # network.dispErrors()
-network.saveNetwork("mnist2")
+network.saveNetwork("mnist3")
 
 network2 = Network([], overrideInit=True)
-network2.loadNetwork("mnist")
+network2.loadNetwork("mnist3")
 
 # test
 correct = 0
