@@ -66,12 +66,46 @@ class DataGetter():
         self.x_test = self.read_3d_array_from_csv(f"{folder_name}/x_test.csv")
         self.y_test = self.read_3d_array_from_csv(f"{folder_name}/y_test.csv")
 
+    def save_files(self, folder_name):
+        os.makedirs(folder_name, exist_ok=True)
+        self.write_file(f"{folder_name}/x_train.csv", self.x_train)
+        self.write_file(f"{folder_name}/y_train.csv", self.y_train)
+        self.write_file(f"{folder_name}/x_test.csv", self.x_test)
+        self.write_file(f"{folder_name}/y_test.csv", self.y_test)
+    
+    def write_file(self, filename, array):
+        f = open(filename, "w")
+        for sample in array:
+            s = ""
+            for item in sample:
+                s = s + str(item[0]) + ","
+            f.write(s[:-1])
+            f.write("\n")
+
+    def read_files(self, folder_name):
+        self.x_train = self.read_file(f"{folder_name}/x_train.csv")
+        self.y_train = self.read_file(f"{folder_name}/y_train.csv")
+        self.x_test = self.read_file(f"{folder_name}/x_test.csv")
+        self.y_test = self.read_file(f"{folder_name}/y_test.csv")
+
+    def read_file(self, filename):
+        with open(filename, "r") as file:
+            newArr = []
+            for line in file:
+                l = line.strip()
+                elems = l.split(",")
+                temp = [[float(i)] for i in elems]
+                newArr.append(temp)
+            return np.array(newArr)
+
 if __name__ == "__main__":
     dg = DataGetter()
-    dg.load_mnist(1000,100)
-    dg.write_files("mnist_data")
+    # dg.load_mnist(1000,100)
+    # dg.write_files("mnist_data")
     # dg.load_mnist(1000,100)
     # dg.write_files("mnist_data")
 
     dg.load_mnist(100,30)
-    dg.write_files("mini_mnist_data")
+    dg.save_files("tiny_mnist_data_3")
+
+    # dg.read_files("mini_mnist_data_3")
