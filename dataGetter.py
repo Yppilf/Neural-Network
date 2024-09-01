@@ -69,9 +69,9 @@ class DataGetter():
 if __name__ == "__main__":
     dg = DataGetter()
     dg.load_mnist(1000,100)
-    dg.write_files("mnist_data_2")
+    dg.write_files("mnist_data")
     # dg.load_mnist(1000,100)
     # dg.write_files("mnist_data")
 
-    dg.load_mnist(10,3)
+    dg.load_mnist(100,30)
     dg.write_files("mini_mnist_data")

@@ -35,25 +35,25 @@ x_test = dg.x_test
 y_train = dg.y_train
 y_test = dg.y_test
 
-# # neural network
-# networkStructure = [
-#     Dense(28 * 28, 40),
-#     Tanh(),
-#     Dense(40, 10),
-#     Tanh()
-# ]
-# network = Network(networkStructure, learning_rate=0.1)
+# neural network
+networkStructure = [
+    Dense(28 * 28, 40),
+    Tanh(),
+    Dense(40, 10),
+    Tanh()
+]
+network = Network(networkStructure, learning_rate=0.1)
 
-# # train
-# errors = network.train(mse, mse_prime, x_train, y_train, epochs=10, verbose = True)
+# train
+errors = network.train(mse, mse_prime, x_train, y_train, epochs=50, verbose = True)
 
-# # Test some functionalities
+# Test some functionalities
 # network.dispPrediction(x_test[0])
 # network.dispErrors()
-# network.saveNetwork("mnist2")
+network.saveNetwork("mnist2")
 
 network2 = Network([], overrideInit=True)
-network2.loadNetwork("CPPversion/mnist3.json")
+network2.loadNetwork("mnist")
 
 # test
 correct = 0
